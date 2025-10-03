@@ -30,8 +30,58 @@ function setup() {
     motor = Motor.create();
     mundo = motor.world;
  
+  botaoreiniciar = createButton('Começar')
+  botaoreiniciar.position(width-120, height-125)
+  botaoreiniciar.size(100,100);
+  botaoreiniciar.style('font-size', '20px')
+  botaoreiniciar.style('background-color', 'violet')
+  botaoreiniciar.style('border', '2px solid purple')
+  botaoreiniciar.style('border-radius', '300px')
+  botaoreiniciar.style('cursor', 'pointer')
+  botaoreiniciar.mousePressed(()=>{
+    reiniciar();
+  })
 
- // Fazer mais plataformas!!!!
+  botaoesquerda = createButton('←')
+  botaoesquerda.position(width/18, height-125)
+  botaoesquerda.size(100,100);
+  botaoesquerda.style('font-size', '40px')
+  botaoesquerda.style('background-color', 'violet')
+  botaoesquerda.style('border', '2px solid purple')
+  //botaoesquerda.style('border-radius', '300px')
+  botaoesquerda.style('cursor', 'pointer')
+
+botaoesquerda.mousePressed(()=>
+jogador.mover(-0.08)
+)
+
+  botaodireita = createButton('→')
+  botaodireita.position(width/4, height-125)
+  botaodireita.size(100,100);
+  botaodireita.style('font-size', '40px')
+  botaodireita.style('background-color', 'violet')
+  botaodireita.style('border', '2px solid purple')
+  //botaodireita.style('border-radius', '300px')
+  botaodireita.style('cursor', 'pointer')
+
+  botaodireita.mousePressed(()=>
+jogador.mover(0.08)
+)
+
+botaopular = createButton('⤒')
+  botaopular.position(width-120, height-125)
+  botaopular.size(100,100);
+  botaopular.style('font-size', '20px')
+  botaopular.style('background-color', 'violet')
+  botaopular.style('border', '2px solid purple')
+  botaopular.style('border-radius', '300px')
+  botaopular.style('cursor', 'pointer')
+   botaopular.mousePressed(()=>
+jogador.pular()
+)
+
+
+  // Fazer mais plataformas!!!!
 
  fundo = createSprite(windowWidth/4+610, windowHeight/4-300)
  fundo.addImage(imagemfundo);
@@ -51,6 +101,9 @@ if(jogador.corpo.position.y>height-100){
 }
 
 if(estadoJogo==="perdeu"){
+    botaodireita.hide()
+  botaoesquerda.hide()
+  botaopular.hide()
   background("Forestgreen")
   textFont(fonte)
     fill(255);
@@ -62,10 +115,14 @@ if(estadoJogo==="perdeu"){
     textSize(38)
     text("Aperte espaço para reiniciar. ", width/2, height-100);
     return;
+
 }
 
 else if(estadoJogo==="inicio"){
   pontuacao=0
+    botaodireita.hide()
+  botaoesquerda.hide()
+  botaopular.hide()
   textFont(fonte)
   fill("DeepPink")
   textAlign(CENTER, CENTER)
@@ -76,12 +133,15 @@ textAlign(CENTER,CENTER );
     fill("black")
     textSize(38)
     text("Aperte espaço para começar. ", width/2, height-330);
-  
+  botaopular.hide()
 }
 
 else if(estadoJogo==="jogando"){
 
- 
+ botaoreiniciar.hide()
+ botaopular.show()
+   botaodireita.show()
+  botaoesquerda.show()
 
   push()
 
